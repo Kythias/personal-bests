@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Angular App</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/stylesheets/style.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+        <script src="/javascripts/angularApp.js"></script>
+        <style> .glyphicon-remove { cursor:pointer }</style>
+        
+        
+    </head>
+    <body ng-app="personalBest">
+        <nav class="navbar navbar-default" ng-controller="NavCtrl as nav">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        </button>
+                    <a class="navbar-brand" href="/#/home">Personal Bests</a>
+                </div>
+                
+                <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li ng-show="nav.isLoggedIn()"><a>{{nav.currentUser()}}</a></li>
+                        <li ng-show="nav.isLoggedIn()"><a href="" ng-click="nav.logOut()">Log Out</a></li>
+                        <li ng-hide="nav.isLoggedIn()"><a href="/#/login">Log In</a></li>
+                        <li ng-hide="nav.isLoggedIn()"><a href="/#/register">Create Account</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid">
+        <div class="col-xs-6 col-xs-offset-3" ui-view="recordslist"></div>
+        <div class="text-center" ui-view="newentryform"></div>
+        <div ui-view></div>
+        
+        </div>
+        </div>
+        </div>
+        
+        
+        
+    </body>
+    
+</html>

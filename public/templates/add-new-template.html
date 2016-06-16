@@ -1,0 +1,7 @@
+ <div ng-controller="NewLiftCtrl as add">
+    <form class="col-xs-10 col-xs-offset-1 form-inline" ng-submit="add.addLift(add.newTitle, add.newWeight)">
+        <input class="form-control" type="text" ng-model="add.newTitle" placeholder="New Lift">
+        <input class="form-control" type="text" ng-model="add.newWeight" placeholder="Weight">
+        <button class="btn btn-default" type="submit">Submit</button>
+    </form>
+</div>
