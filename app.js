@@ -2,8 +2,8 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 require('./models/Bests.js');
@@ -11,7 +11,7 @@ require('./models/Users.js');
 require('./config/passport.js');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+
 
 var app = express();
 
@@ -30,7 +30,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
 app.use(passport.initialize());
 
 // catch 404 and forward to error handler

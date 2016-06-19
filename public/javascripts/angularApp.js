@@ -111,10 +111,7 @@ app
         
     };
 }])
-    .controller('AuthCtrl', [
-    '$state',
-    'auth',
-    function($state, auth){
+    .controller('AuthCtrl', ['$state', 'auth', function($state, auth){
         var self = this;
         
         self.user = {};

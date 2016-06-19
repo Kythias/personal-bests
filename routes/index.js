@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require("mongoose");
+var mongoose = require('mongoose');
 var Best = mongoose.model('Best');
 var passport = require('passport');
 var User = mongoose.model('User');
@@ -78,7 +78,7 @@ router.post('/login', function(req, res, next) {
         } else {
             return res.status(401).json(info);
         }
-    });
+    })(req, res, next);
 });
 
 module.exports = router;
