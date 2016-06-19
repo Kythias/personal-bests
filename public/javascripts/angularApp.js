@@ -1,6 +1,6 @@
 var app = angular.module('personalBest', ['ui.router']);
 
-app.factory('records', ['$http',function($http){
+app.factory('records', ['$http', 'auth', function($http, auth){
     var o = {
         bests: []
     };
@@ -12,13 +12,17 @@ app.factory('records', ['$http',function($http){
     };
     
     o.add = function(best){
-        return $http.post('/bests', best).success(function(data){
+        return $http.post('/bests', best, {
+            headers: {Authorization: 'Bearer '+auth.getToken()}
+        }).success(function(data){
             o.bests.push(data);
         });
     };
     
     o.remove = function(id, index){
-        return $http.delete('/bests/' + id).success(function(data){
+        return $http.delete('/bests/' + id, null, {
+            headers: {Authorization: 'Bearer '+auth.getToken()}
+        }).success(function(data){
             o.bests.splice(index, 1);
         });
     };
@@ -128,8 +132,8 @@ app
                 self.error = error;
             }).then(function(){
                 $state.go('home');
-            })
-        }
+            });
+        };
     }])
     .controller('NavCtrl', [
         'auth',
