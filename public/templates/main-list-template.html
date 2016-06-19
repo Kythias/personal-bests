@@ -1,10 +1,14 @@
         <table class="table table-striped">
         <th class="col-xs-4">Lift</th>
-        <th class="col-xs-4 text-center">Weight</th>
-        <th class="col-xs-4 text-right">Remove</th>
+        <th class="col-xs-2 text-center">Weight</th>
+        <th class="col-xs-2 text-center">By</th>
+        <th class="col-xs-3 text-center">On</th>
+        <th class="col-xs-1 text-right">Remove</th>
         <tr ng-repeat="lift in main.lifts">
             <td>{{lift.title}}</td>
             <td class="text-center">{{lift.weight}} kg</td>
+            <td class="text-center">{{lift.author}}</td>
+            <td class="text-center">{{lift.date | date : mediumDate}}</td>
             <td class="text-right"><span class="glyphicon glyphicon-remove" ng-click="main.remove(lift._id, $index)"></span></td>
         </tr>
         
