@@ -1,8 +1,23 @@
-var app = angular.module('personalBest', ['ui.router']);
+var app = angular.module('personalBest', [
+    'ui.router',
+    'ui.bootstrap'
+    ]);
 
 app.factory('records', ['$http', 'auth', function($http, auth){
     var o = {
-        bests: []
+        bests: [],
+        liftList: [
+            {name: 'Clean'},
+            {name: 'Clean & Jerk'},
+            {name: 'Push Press'},
+            {name: 'Strict Press'},
+            {name: 'Deadlift'},
+            {name: 'Snatch'},
+            {name: 'Front Squat'},
+            {name: 'Back Squat'},
+            {name: 'Overhead Squat'},
+            {name: 'Thuster'}
+            ]
     };
     
     o.getAll = function() {
@@ -20,7 +35,7 @@ app.factory('records', ['$http', 'auth', function($http, auth){
     };
     
     o.remove = function(id, index){
-        return $http.delete('/bests/' + id, null, {
+        return $http.delete('/bests/' + id, {
             headers: {Authorization: 'Bearer '+auth.getToken()}
         }).success(function(data){
             o.bests.splice(index, 1);
@@ -99,6 +114,8 @@ app.controller('MainCtrl', ['records', function(records){
 app
     .controller('NewLiftCtrl', ['records', function(records){
     var self = this;
+    
+    self.liftList = records.liftList;
     
     self.addLift = function(newTitle, newWeight){
         if(!self.newTitle || !self.newWeight) {return;}
