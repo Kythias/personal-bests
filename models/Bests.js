@@ -4,7 +4,9 @@ var BestSchema = new mongoose.Schema({
     title: String,
     weight: Number,
     date: { type: Date, default: Date.now },
-    author: String
+    author: String,
+    firstName: String,
+    lastName: String
 });
 
 

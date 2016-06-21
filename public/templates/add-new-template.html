@@ -2,7 +2,7 @@
     <form class="col-xs-10 col-xs-offset-1 form-inline" ng-submit="add.addLift(add.newTitle, add.newWeight)">
         <select class="form-control" ng-model="add.newTitle">
             <option value="">Select Lift...</option>
-            <option ng-repeat="lift in add.liftList" value={{lift.name}}>{{ lift.name }}</option>
+            <option ng-repeat="lift in add.liftList | orderBy: 'name'" value={{lift.name}}>{{ lift.name }}</option>
         </select>
         <input class="form-control" type="text" ng-model="add.newWeight" placeholder="Weight">
         <button class="btn btn-default" type="submit">Submit</button>

@@ -7,7 +7,7 @@
         <tr ng-repeat="lift in main.lifts">
             <td>{{lift.title}}</td>
             <td class="text-center">{{lift.weight}} kg</td>
-            <td class="text-center">{{lift.author}}</td>
+            <td class="text-center">{{lift.firstName}} {{lift.lastName}}</td>
             <td class="text-center">{{lift.date | date : mediumDate}}</td>
             <td class="text-right"><span class="glyphicon glyphicon-trash" ng-click="main.remove(lift._id, $index)"></span></td>
         </tr>

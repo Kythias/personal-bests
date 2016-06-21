@@ -25,6 +25,9 @@ router.post('/bests', auth, function(req, res, next){
     var best = new Best(req.body);
     
     best.author = req.payload.username;
+    best.firstName = req.payload.firstName;
+    best.lastName = req.payload.lastName;
+    
     
     best.save(function(err, best){
         if(err){return next(err);}
@@ -53,6 +56,8 @@ router.post('/register', function(req, res, next){
     var user = new User();
     
     user.username = req.body.username;
+    user.firstName = req.body.firstName;
+    user.lastName = req.body.lastName;
     
     user.setPassword(req.body.password);
     
