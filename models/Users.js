@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
+var secret = process.env.herokusec;
 
 var UserSchema = new mongoose.Schema({
     username: {type: String, lowercase: true, unique: true},
@@ -36,7 +37,7 @@ UserSchema.methods.generateJWT = function() {
         firstName: this.firstName,
         lastName: this.lastName,
         exp: parseInt(exp.getTime() / 1000, 10),
-    }, 'SECRET');
+    }, secret);
 };
 
 mongoose.model('User', UserSchema);
