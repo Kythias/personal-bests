@@ -5,7 +5,7 @@ var Best = mongoose.model('Best');
 var passport = require('passport');
 var User = mongoose.model('User');
 var jwt = require('express-jwt');
-var secret = process.env.herokusec;
+var secret = 'SECRET'; //process.env.herokusec;
 var auth = jwt({secret: secret, userProperty: 'payload'});
 
 
