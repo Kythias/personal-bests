@@ -48,6 +48,16 @@ router.delete('/bests/:id', auth, function(req, res, next){
         
         
     });
+    
+router.get('/profile/:user', function(req, res, next){
+    Best.find({
+        author: req.params.user
+    }, function(err, bests){
+        if(err){return next(err);}
+        
+        res.json(bests);
+    });
+});
 
 router.post('/register', function(req, res, next){
     if(!req.body.username || !req.body.password){

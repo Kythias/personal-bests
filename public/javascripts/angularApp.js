@@ -26,6 +26,12 @@ app.factory('records', ['$http', 'auth', function($http, auth){
         });
     };
     
+    o.getMine = function(username) {
+        return $http.get('/profile/' + username).success(function(data){
+            angular.copy(data, o.bests);
+        });
+    };
+    
     o.add = function(best){
         return $http.post('/bests', best, {
             headers: {Authorization: 'Bearer '+auth.getToken()}
@@ -73,7 +79,7 @@ app.factory('auth', ['$http', '$window', function($http, $window){
             var token = auth.getToken();
             var payload = JSON.parse($window.atob(token.split('.')[1]));
             
-            return payload.username;
+            return payload.firstName + ' ' + payload.lastName;
         }
     };
     
@@ -157,6 +163,19 @@ app
             self.isLoggedIn = auth.isLoggedIn;
             self.currentUser = auth.currentUser;
             self.logOut = auth.logOut;
+    }])
+    .controller('ProfileCtrl', [
+        'auth',
+        'records',
+        '$state',
+        function(auth, records, $state){
+            var self = this;
+            
+            self.me = auth.currentUser();
+            
+            self.myLifts = records.bests;
+            
+            
         }]);
 
 app.config([
@@ -207,8 +226,20 @@ app.config([
                     $state.go('home');
                 }
             }]
+        })
+        .state('profiles', {
+            url: '/profile/{username}',
+            templateUrl: 'templates/profile-template.html',
+            controller: 'ProfileCtrl',
+            controllerAs: 'prof',
+            resolve: {
+                postPromise: ['records', 'auth', function(records, auth){
+                    return records.getMine(auth.currentUser());
+                    // return records.getAll();
+                }]
+            }
         });
         
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('home');
     
     }]);

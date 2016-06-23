@@ -33,7 +33,7 @@
                         
                         <div class="collapse navbar-collapse" id="navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
-                                <li ng-show="nav.isLoggedIn()"><a>{{nav.currentUser()}}</a></li>
+                                <li ng-show="nav.isLoggedIn()"><a href="/#/profile/{{nav.currentUser()}}">{{nav.currentUser()}}</a></li>
                                 <li ng-show="nav.isLoggedIn()"><a href="" ng-click="nav.logOut()">Log Out</a></li>
                                 <li ng-hide="nav.isLoggedIn()"><a href="/#/login">Log In</a></li>
                                 <li ng-hide="nav.isLoggedIn()"><a href="/#/register">Create Account</a></li>
