@@ -21,7 +21,7 @@
     <body ng-app="personalBest">
         <div class="container-fluid">
                 <nav class="navbar navbar-default" ng-controller="NavCtrl as nav">
-                    <div class="container">
+                    <div class="container-fluid">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
                                 <span class="icon-bar"></span>
@@ -33,7 +33,7 @@
                         
                         <div class="collapse navbar-collapse" id="navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
-                                <li ng-show="nav.isLoggedIn()"><a href="/#/profile/{{nav.currentUser()}}">{{nav.currentUser()}}</a></li>
+                                <li ng-show="nav.isLoggedIn()"><a href="/#/profile/{{nav.currentUser()}}">{{nav.me}}</a></li>
                                 <li ng-show="nav.isLoggedIn()"><a href="" ng-click="nav.logOut()">Log Out</a></li>
                                 <li ng-hide="nav.isLoggedIn()"><a href="/#/login">Log In</a></li>
                                 <li ng-hide="nav.isLoggedIn()"><a href="/#/register">Create Account</a></li>
@@ -43,9 +43,9 @@
                 </nav>
             <div class="row">
             <div class="col-xs-12 col-md-8 col-md-offset-2" ui-view="recordslist"></div>
-            <div class="text-center" ui-view="newentryform"></div>
-            <div ui-view></div>
-            
+            <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2" ui-view></div>
+            <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2" ui-view="profileMain"></div>
+            <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2" ui-view="newentryform"></div>
             </div>
             </div>
             </div>

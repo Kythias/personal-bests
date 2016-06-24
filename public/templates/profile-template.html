@@ -1,4 +1,18 @@
 <div ng-controller="ProfileCtrl as prof">
-    <h3>{{prof.me}}'s Profile</h3>
-    <p ng-repeat="lift in prof.myLifts">{{lift}}</p>
+    <h3 class="h3">{{prof.profileOwner}}'s Profile</h3>
+    <h4 class="h4">{{prof.username}}</h4>
+    
+     <table class="table table-striped">
+        <th class="col-xs-4">Lift</th>
+        <th class="col-xs-2 text-center">Weight</th>
+        <th class="col-xs-3 text-center">On</th>
+        <th class="col-xs-1 text-right" ng-if="prof.myProfile()"></th>
+        <tr ng-repeat="lift in prof.myLifts">
+            <td>{{lift.title}}</td>
+            <td class="text-center">{{lift.weight}} kg</td>
+            <td class="text-center">{{lift.date | date : mediumDate}}</td>
+            <td class="text-right" ng-if="prof.myProfile()"><span class="glyphicon glyphicon-trash" ng-click="main.remove(lift._id, $index)"></span></td>
+        </tr>
+        
+        </table>
 </div>

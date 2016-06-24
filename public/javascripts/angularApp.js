@@ -79,6 +79,15 @@ app.factory('auth', ['$http', '$window', function($http, $window){
             var token = auth.getToken();
             var payload = JSON.parse($window.atob(token.split('.')[1]));
             
+            return payload.username;
+        }
+    };
+    
+    auth.currentNames = function() {
+        if(auth.isLoggedIn()){
+            var token= auth.getToken();
+            var payload = JSON.parse($window.atob(token.split('.')[1]));
+            
             return payload.firstName + ' ' + payload.lastName;
         }
     };
@@ -102,17 +111,19 @@ app.factory('auth', ['$http', '$window', function($http, $window){
     return auth;
 }]);
 
-app.controller('MainCtrl', ['records', function(records){
+app.controller('MainCtrl', ['records', 'auth', function(records, auth){
     
     var self = this;
     
     self.lifts = records.bests;
     
+    self.username = auth.currentUser();
+    
     self.remove = function(id, index){
         records.remove(id, index);
     };
     
-    
+    self.liftList = records.liftList;
     
     
     }]);
@@ -162,19 +173,25 @@ app
             
             self.isLoggedIn = auth.isLoggedIn;
             self.currentUser = auth.currentUser;
+            self.me = auth.currentNames();
             self.logOut = auth.logOut;
     }])
     .controller('ProfileCtrl', [
         'auth',
         'records',
         '$state',
-        function(auth, records, $state){
+        '$stateParams',
+        function(auth, records, $state, $stateParams){
             var self = this;
             
-            self.me = auth.currentUser();
+            // self.me = auth.currentNames();
+            self.profileOwner = $stateParams.username;
             
             self.myLifts = records.bests;
             
+            self.myProfile = function() {
+                return $stateParams.username == auth.currentUser();
+            };
             
         }]);
 
@@ -193,11 +210,6 @@ app.config([
                     controllerAs: 'main',
                     
                 },
-                'newentryform': {
-                    templateUrl: 'templates/add-new-template.html',
-                    controller: 'NewLiftCtrl',
-                    controllerAs: 'add'
-                }
         },
             resolve: {
                 postPromise: ['records', function(records){
@@ -229,6 +241,18 @@ app.config([
         })
         .state('profiles', {
             url: '/profile/{username}',
+            views: {
+                'profileMain': {
+                    templateUrl: 'templates/profile-template.html',
+                    controller: 'ProfileCtrl',
+                    controllerAs: 'prof'
+                },
+                'newentryform': {
+                    templateUrl: 'templates/add-new-template.html',
+                    controller: 'NewLiftCtrl',
+                    controllerAs: 'add'
+                }
+            },
             templateUrl: 'templates/profile-template.html',
             controller: 'ProfileCtrl',
             controllerAs: 'prof',
