@@ -16,7 +16,7 @@ app.factory('records', ['$http', 'auth', function($http, auth){
             {name: 'Front Squat'},
             {name: 'Back Squat'},
             {name: 'Overhead Squat'},
-            {name: 'Thuster'}
+            {name: 'Thruster'}
             ]
     };
     
@@ -111,6 +111,20 @@ app.factory('auth', ['$http', '$window', function($http, $window){
     return auth;
 }]);
 
+app.factory('userdata', ['$http', function($http){
+        var user = {
+            stuff: []
+        };
+        
+        user.getInfo = function(username){
+            return $http.get('/user/' + username).success(function(data){
+                angular.copy(data, user.stuff)
+            });
+        };
+        
+        return user;
+    }]);
+
 app.controller('MainCtrl', ['records', 'auth', function(records, auth){
     
     var self = this;
@@ -124,6 +138,8 @@ app.controller('MainCtrl', ['records', 'auth', function(records, auth){
     };
     
     self.liftList = records.liftList;
+    
+    self.myProfile = false;
     
     
     }]);
@@ -179,13 +195,14 @@ app
     .controller('ProfileCtrl', [
         'auth',
         'records',
+        'userdata',
         '$state',
         '$stateParams',
-        function(auth, records, $state, $stateParams){
+        function(auth, records, userdata, $state, $stateParams){
             var self = this;
             
-            // self.me = auth.currentNames();
-            self.profileOwner = $stateParams.username;
+            self.profileOwner = userdata.stuff[0].firstName;
+            self.profileDetails = userdata.stuff[0].firstName + ' ' + userdata.stuff[0].lastName + ' (' + userdata.stuff[0].username + ')';
             
             self.myLifts = records.bests;
             
@@ -257,9 +274,12 @@ app.config([
             controller: 'ProfileCtrl',
             controllerAs: 'prof',
             resolve: {
-                postPromise: ['records', 'auth', function(records, auth){
-                    return records.getMine(auth.currentUser());
+                specRecords: ['records', '$stateParams', function(records, $stateParams){
+                    return records.getMine($stateParams.username);
                     // return records.getAll();
+                }],
+                specUser: ['userdata', '$stateParams', function(userdata, $stateParams){
+                    return userdata.getInfo($stateParams.username);
                 }]
             }
         });

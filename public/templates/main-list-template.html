@@ -7,7 +7,7 @@
         </div>
         <div class="col-xs-7 col-xs-offset-1 well well-sm text-center">
             <h4>Record, Compare, Compete</h4>
-            <p>To add your new PB, go to <a href="/#/profile/{{main.username}}">Your Profile</a>!</p>
+            <p>To add your new PB, go to <a ng-href="/#/profile/{{main.username}}">Your Profile</a>!</p>
         </div>
         
         <table class="table table-striped">
@@ -18,7 +18,7 @@
         <tr ng-repeat="lift in main.lifts | filter: main.query : true">
             <td>{{lift.title}}</td>
             <td class="text-center">{{lift.weight}} kg</td>
-            <td class="text-center"><a href="/#/profile/{{lift.username}}">{{lift.firstName}} {{lift.lastName}}</a></td>
+            <td class="text-center"><a ng-href="/#/profile/{{lift.author}}">{{lift.firstName}} {{lift.lastName}}</a></td>
             <td class="text-center">{{lift.date | date : mediumDate}}</td>
         </tr>
         

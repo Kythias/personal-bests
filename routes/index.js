@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Best = mongoose.model('Best');
+var User = mongoose.model('User');
 var passport = require('passport');
 var User = mongoose.model('User');
 var jwt = require('express-jwt');
@@ -56,6 +57,16 @@ router.get('/profile/:user', function(req, res, next){
         if(err){return next(err);}
         
         res.json(bests);
+    });
+});
+
+router.get('/user/:username', function(req, res, next){
+    User.find({
+        username: req.params.username
+    }, function (err, info) {
+        if(err){ return next(err); }
+        
+        res.json(info);
     });
 });
 
