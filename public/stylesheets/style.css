@@ -1,5 +1,22 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #647786;
 }
 
+.table-striped>tbody>tr:nth-child(odd)>td, 
+.table-striped>tbody>tr:nth-child(odd)>th {
+   background-color: #8A97A2;
+ }
+
+table {
+    color: white;
+}
+
+a {
+    color: #1E364A;
+}
+
+.navbar-brand {
+    font-family: 'Trochut', cursive;
+}
 

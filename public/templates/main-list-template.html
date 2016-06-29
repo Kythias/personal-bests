@@ -1,8 +1,7 @@
         <div class="col-xs-4 form-group">
             <p>Select A Lift:</p>
-            <select class="form-control" ng-model="main.query">
-                <option value="" selected="selected">All</option>
-                <option ng-repeat="lift in main.liftList | orderBy: 'name'" value={{lift.name}}>{{lift.name}}</option>
+            <select class="form-control" ng-model="main.query" ng-options="lift.name as lift.name for lift in main.liftList | orderBy: 'name'">
+                <option value="">All</option>
             </select>
         </div>
         <div class="col-xs-7 col-xs-offset-1 well well-sm text-center">
@@ -15,7 +14,7 @@
         <th class="col-xs-2 text-center">Weight</th>
         <th class="col-xs-4 text-center">By</th>
         <th class="col-xs-2 text-center">On</th>
-        <tr ng-repeat="lift in main.lifts | filter: main.query : true">
+        <tr ng-repeat="lift in main.lifts | filter: main.query || '!!' ">
             <td>{{lift.title}}</td>
             <td class="text-center">{{lift.weight}} kg</td>
             <td class="text-center"><a ng-href="/#/profile/{{lift.author}}">{{lift.firstName}} {{lift.lastName}}</a></td>
