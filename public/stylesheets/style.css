@@ -1,22 +1,56 @@
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: #647786;
+  font: 14px Verdana, Geneva, sans-serif;
+  background-color: #79c5ff;
+  color: #003d6b;
+  padding-top: 70px;
 }
 
 .table-striped>tbody>tr:nth-child(odd)>td, 
 .table-striped>tbody>tr:nth-child(odd)>th {
-   background-color: #8A97A2;
+   background-color: #a9daff;
  }
 
 table {
-    color: white;
+    color: #003d6b;
 }
 
 a {
-    color: #1E364A;
+    color: #d97c00;
+}
+
+a:hover {
+    color: #a75f00;
 }
 
 .navbar-brand {
     font-family: 'Trochut', cursive;
 }
 
+.navbar-custom {
+    background-color: #004f8b;
+    color: #003d6b;
+    border-radius: 0;
+    border-bottom: solid white 2px;
+}
+
+.navbar-custom .navbar-toggle {
+    border: solid white 1px;
+}
+
+.navbar-custom .navbar-toggle .icon-bar {
+    background-color: white;
+}
+
+.navbar-custom .navbar-nav > li > a {
+    color: #a9daff;
+}
+.navbar-custom > .active > a > .active > a:hover > .active > a:focus {
+    color: #bbc5ff;
+}
+.navbar-custom .navbar-nav > li > a:hover, .nav > li > a:focus { 
+    text-decoration: underline;
+    background-color: transparent; 
+}
+.navbar-custom .navbar-brand {
+    color: #a9daff;
+}
