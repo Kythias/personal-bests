@@ -2,15 +2,20 @@
     <h3 class="text-capitalize">{{prof.profileOwner}}'s Profile</h3>
     <h4 class="text-capitalize">{{prof.profileDetails}}</h4>
     
+    <p>Enter a percentage below to show a training percentage against the lifts</p>
+    <input type="text" ng-model="percentageChoice">
+    
      <table class="table table-striped">
         <th class="col-xs-4">Lift</th>
         <th class="col-xs-2 text-center">Weight</th>
         <th class="col-xs-3 text-center">On</th>
+        <th class="col-xs-2 text-center">Training %</th>
         <th class="col-xs-1 text-right" ng-if="prof.myProfile()"></th>
         <tr ng-repeat="lift in prof.myLifts">
             <td>{{lift.title}}</td>
             <td class="text-center">{{lift.weight}} kg</td>
             <td class="text-center">{{lift.date | date : mediumDate}}</td>
+            <td class="text-center">{{(lift.weight / 100) * percentageChoice | number: 1}}</td>
             <td class="text-right" ng-if="prof.myProfile()"><span class="glyphicon glyphicon-trash" ng-click="main.remove(lift._id, $index)"></span></td>
         </tr>
         
