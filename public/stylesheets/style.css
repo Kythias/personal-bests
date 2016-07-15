@@ -54,3 +54,10 @@ a:hover {
 .navbar-custom .navbar-brand {
     color: #a9daff;
 }
+
+.sortorder:after {
+  content: '\25b2'; 
+}
+.sortorder.reverse:after {
+  content: '\25bc'; 
+}

@@ -8,13 +8,25 @@ app.factory('records', ['$http', 'auth', function($http, auth){
         bests: [],
         liftList: [
             {name: 'Clean'},
+            {name: 'Clean (2RM)'},
+            {name: 'Clean (3RM)'},
             {name: 'Clean & Jerk'},
             {name: 'Push Press'},
+            {name: 'Push Press (2RM)'},
+            {name: 'Push Press (3RM)'},
             {name: 'Strict Press'},
+            {name: 'Strict Press (2RM)'},
+            {name: 'Strict Press (3RM)'},
             {name: 'Deadlift'},
             {name: 'Snatch'},
+            {name: 'Snatch (2RM)'},
+            {name: 'Snatch (3RM)'},
             {name: 'Front Squat'},
+            {name: 'Front Squat (2RM)'},
+            {name: 'Front Squat (3RM)'},
             {name: 'Back Squat'},
+            {name: 'Back Squat (2RM)'},
+            {name: 'Back Squat (3RM)'},
             {name: 'Overhead Squat'},
             {name: 'Thruster'}
             ]
@@ -222,6 +234,14 @@ app
             self.newTitle = null;
             self.newWeight = null;
             };
+            
+            this.propertyName = 'lift.date';
+            this.reverse = true;
+            
+            this.sortBy = function(propertyName) {
+                this.reverse = (this.propertyName === propertyName) ? !this.reverse : false;
+                this.propertyName = propertyName;
+            };
         }]);
 
 app.config([
@@ -243,6 +263,9 @@ app.config([
             resolve: {
                 postPromise: ['records', function(records){
                     return records.getAll();
+                }],
+                namePromise: ['auth', function(auth){
+                    return auth.currentNames();
                 }]
             }
         })
