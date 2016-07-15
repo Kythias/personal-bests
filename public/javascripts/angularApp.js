@@ -235,7 +235,7 @@ app
             self.newWeight = null;
             };
             
-            this.propertyName = 'lift.date';
+            this.propertyName = 'date';
             this.reverse = true;
             
             this.sortBy = function(propertyName) {

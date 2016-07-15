@@ -22,12 +22,12 @@
     
     
      <table class="table table-striped">
-        <th class="col-xs-4" ng-click="sortBy('lift.title')">Lift<span class="sortorder" ng-show="prof.propertyName === 'lift.title'" ng-class="{reverse: reverse}"></span></th>
-        <th class="col-xs-2 text-center" ng-click="prof.sortBy('lift.weight')">Weight<span class="sortorder" ng-show="prof.propertyName === 'lift.weight'" ng-class="{reverse: reverse}"></span></th>
-        <th class="col-xs-3 text-center" ng-click="prof.sortBy('lift.date')">On<span class="sortorder" ng-show="prof.propertyName === 'lift.date'" ng-class="{reverse: reverse}"></span></th>
+        <th class="col-xs-4" ng-click="prof.sortBy('title')">Lift<span class="sortorder" ng-show="prof.propertyName === 'title'" ng-class="{reverse: prof.reverse}"></span></th>
+        <th class="col-xs-2 text-center" ng-click="prof.sortBy('weight')">Weight<span class="sortorder" ng-show="prof.propertyName === 'weight'" ng-class="{reverse: prof.reverse}"></span></th>
+        <th class="col-xs-3 text-center" ng-click="prof.sortBy('date')">On<span class="sortorder" ng-show="prof.propertyName === 'date'" ng-class="{reverse: prof.reverse}"></span></th>
         <th class="col-xs-2 text-center">Training %</th>
         <th class="col-xs-1 text-right" ng-if="prof.myProfile()"></th>
-        <tr ng-repeat="lift in prof.myLifts | orderBy:prof.propertyName:reverse">
+        <tr ng-repeat="lift in prof.myLifts | orderBy:prof.propertyName:prof.reverse">
             <td>{{lift.title}}</td>
             <td class="text-center">{{lift.weight}} kg</td>
             <td class="text-center">{{lift.date | date : mediumDate}}</td>
