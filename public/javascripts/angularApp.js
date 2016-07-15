@@ -210,6 +210,18 @@ app
                 return $stateParams.username == auth.currentUser();
             };
             
+            self.liftList = records.liftList;
+    
+            self.addLift = function(newTitle, newWeight){
+                if(!self.newTitle || !self.newWeight) {return;}
+                records.add({
+                    title: self.newTitle,
+                    weight: self.newWeight
+                });
+                
+            self.newTitle = null;
+            self.newWeight = null;
+            };
         }]);
 
 app.config([
@@ -282,7 +294,13 @@ app.config([
                     return userdata.getInfo($stateParams.username);
                 }]
             }
+        })
+        .state('profiles.add', {
+            templateUrl: 'templates/add-new-template.html',
+            controller: 'NewLiftCtrl',
+            controllerAs: 'add'
         });
+        
         
     $urlRouterProvider.otherwise('home');
     
