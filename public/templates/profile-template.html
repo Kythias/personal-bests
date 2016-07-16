@@ -3,7 +3,7 @@
     <h4 class="text-capitalize">{{prof.profileDetails}}</h4>
    
     <div class="container-fluid">
-    <div class="row">
+    <div class="row well">
         <p ng-if="prof.myProfile()">Add a new PB!</p>
             <form class="col-xs-10 col-xs-offset-1 form-inline" ng-submit="prof.addLift(prof.newTitle, prof.newWeight)" ng-if="prof.myProfile()">
                 <select class="form-control" ng-model="prof.newTitle">
@@ -15,10 +15,24 @@
             </form>
     </div>
     
-    <div class="row form-group form-inline">
-        <p>Enter a percentage below to show a training percentage against the lifts</p>
-        <input type="number" class="form-control col-xs-1 col-xs-offset-1" ng-model="percentageChoice">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label for="trainingpc" class="col-xs-6 col-sm-2 control-label">% For Training</label>
+                <div class="col-xs-6 col-sm-9">
+                    <input id="trainingpc" type="number" class="form-control" ng-model="percentageChoice">
+                </div>
+        </div>
+        <div class="form-group">
+            <label for="liftfilter" class="col-xs-6 col-sm-2 control-label">Show Lift</label>
+                <div class="col-xs-6 col-sm-9">
+                    <select class="form-control" ng-model="prof.query" ng-options="lift.name as lift.name for lift in prof.liftList | orderBy: 'name'">
+                        <option value="">All</option>
+                    </select>
+                </div>
+        </div>
     </div>
+    
+    
     
     
      <table class="table table-striped">
@@ -27,7 +41,7 @@
         <th class="col-xs-3 text-center" ng-click="prof.sortBy('date')">On<span class="sortorder" ng-show="prof.propertyName === 'date'" ng-class="{reverse: prof.reverse}"></span></th>
         <th class="col-xs-2 text-center">Training %</th>
         <th class="col-xs-1 text-right" ng-if="prof.myProfile()"></th>
-        <tr ng-repeat="lift in prof.myLifts | orderBy:prof.propertyName:prof.reverse">
+        <tr ng-repeat="lift in prof.myLifts | orderBy:prof.propertyName:prof.reverse | filter:(!!prof.query || undefined) && prof.query :true">
             <td>{{lift.title}}</td>
             <td class="text-center">{{lift.weight}} kg</td>
             <td class="text-center">{{lift.date | date : mediumDate}}</td>
