@@ -14,7 +14,7 @@
         <th class="col-xs-2 text-center">Weight</th>
         <th class="col-xs-4 text-center">By</th>
         <th class="col-xs-2 text-center">On</th>
-        <tr ng-repeat="lift in main.lifts | filter: main.query || '!!' ">
+        <tr ng-repeat="lift in main.lifts | filter: (!!main.query || undefined) && main.query : true">
             <td>{{lift.title}}</td>
             <td class="text-center">{{lift.weight}} kg</td>
             <td class="text-center"><a ng-href="/#/profile/{{lift.author}}">{{lift.firstName}} {{lift.lastName}}</a></td>

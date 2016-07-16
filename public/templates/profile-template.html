@@ -10,7 +10,7 @@
                     <option value="">Select Lift...</option>
                     <option ng-repeat="lift in prof.liftList | orderBy: 'name'" value={{lift.name}}>{{ lift.name }}</option>
                 </select>
-                <input class="form-control" type="text" ng-model="prof.newWeight" placeholder="Weight">
+                <input class="form-control" type="number" ng-model="prof.newWeight" placeholder="Weight">
                 <button class="btn btn-default" type="submit">Submit</button>
             </form>
     </div>
