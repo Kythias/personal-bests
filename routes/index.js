@@ -4,7 +4,6 @@ var mongoose = require('mongoose');
 var Best = mongoose.model('Best');
 var User = mongoose.model('User');
 var passport = require('passport');
-var User = mongoose.model('User');
 var jwt = require('express-jwt');
 var secret = 'SECRET'; //process.env.herokusec;
 var auth = jwt({secret: secret, userProperty: 'payload'});
@@ -20,6 +19,14 @@ router.get('/bests', function(req, res, next){
         if(err){return next(err);}
         
         res.json(bests);
+    });
+});
+
+router.get('/list', function(req, res, next){
+    User.find(function(err, users){
+        if(err){return next(err);}
+        
+        res.json(users);
     });
 });
 

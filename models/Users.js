@@ -40,4 +40,15 @@ UserSchema.methods.generateJWT = function() {
     }, secret);
 };
 
+UserSchema.options.toJSON = {
+    transform: function(doc, ret, options){
+        delete ret.hash;
+        delete ret.salt;
+        delete ret._id;
+        delete ret._V;
+        ret.fullName = ret.firstName + " " + ret.lastName;
+        return ret;
+    }
+};
+
 mongoose.model('User', UserSchema);

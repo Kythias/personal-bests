@@ -63,6 +63,21 @@ app.factory('records', ['$http', 'auth', function($http, auth){
     return o;
 }]);
 
+app.factory('userlist', ['$http', function($http) {
+    var list = {
+        users: []
+    };
+    
+    list.getUsers = function() {
+        return $http.get('/list').success(function(data){
+            angular.copy(data, list.users);
+        });
+    };
+    
+    return list;
+    
+}]);
+
 app.factory('auth', ['$http', '$window', function($http, $window){
     var auth = {};
     
@@ -137,11 +152,13 @@ app.factory('userdata', ['$http', function($http){
         return user;
     }]);
 
-app.controller('MainCtrl', ['records', 'auth', function(records, auth){
+app.controller('MainCtrl', ['records', 'auth', 'userlist', function(records, auth, userlist){
     
     var self = this;
     
     self.lifts = records.bests;
+    
+    self.users = userlist.users;
     
     self.username = auth.currentUser();
     
@@ -266,6 +283,9 @@ app.config([
                 }],
                 namePromise: ['auth', function(auth){
                     return auth.currentNames();
+                }],
+                userPromise: ['userlist', function(userlist){
+                    return userlist.getUsers();
                 }]
             }
         })

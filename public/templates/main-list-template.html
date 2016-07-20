@@ -1,23 +1,23 @@
         <div class="container-fluid">
             <div class="row">
-            <div class="col-sm-6 col-sm-push-6 well well-sm text-center">
+            <div class="col-md-6 col-md-push-6 well well-sm text-center">
                 <h4>Record, Compare, Compete</h4>
                 <p>To add your new PB or view all of your records, go to <a ng-href="/#/profile/{{main.username}}">Your Profile</a>!</p>
                 <p>To view someone else's profile, search for their name in the box below.</p>
                 <div class="form-inline">
                     <div class="form-group">
-                        <!--<input type="text" placeholder="Find a Name" class="form-control">-->
-                        <input type="text" ng-model="asyncSelected" placeholder="Locations loaded via $http" uib-typeahead="address for address in getLocation($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" class="form-control">
-                        <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
-                        <div ng-show="noResults">
-                          <i class="glyphicon glyphicon-remove"></i> No Results Found
-                        </div>
+                        <input type="text" ng-model="main.selected" uib-typeahead="user as user.fullName for user in main.users | filter:{fullName: $viewValue} | limitTo:8" typeahead-editable="false" class="form-control">
                     </div>
-                    <button type="button" class="btn btn-default hidden-xs">Go</button>
-                    <button type="button" class="btn btn-default btn-block visible-xs">Go</button>
+                    
+                    
+                    <a class="btn btn-default hidden-xs" href="/#/profile/{{main.selected.username}}">Go</a>
+                    <a class="btn btn-default btn-block visible-xs" href="/#/profile/{{main.selected.username}}">Go</a>
+                    <div ng-if="noResults">
+                      <span><i class="glyphicon glyphicon-remove"></i> No Results Found</span>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-sm-pull-6 form-group">
+            <div class="col-md-6 col-md-pull-6 form-group">
                 <p>Select A Lift:</p>
                 <select class="form-control" ng-model="main.query" ng-options="lift.name as lift.name for lift in main.liftList | orderBy: 'name'">
                     <option value="">All</option>
