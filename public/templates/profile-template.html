@@ -34,8 +34,8 @@
     
     
     
-    
-     <table class="table table-striped">
+    <div class="row">
+     <table class="table table-striped col-sm-10">
         <th class="col-xs-4" ng-click="prof.sortBy('title')">Lift<span class="sortorder" ng-show="prof.propertyName === 'title'" ng-class="{reverse: prof.reverse}"></span></th>
         <th class="col-xs-2 text-center" ng-click="prof.sortBy('weight')">Weight<span class="sortorder" ng-show="prof.propertyName === 'weight'" ng-class="{reverse: prof.reverse}"></span></th>
         <th class="col-xs-3 text-center" ng-click="prof.sortBy('date')">On<span class="sortorder" ng-show="prof.propertyName === 'date'" ng-class="{reverse: prof.reverse}"></span></th>
@@ -50,5 +50,6 @@
         </tr>
         
         </table>
+        </div>
         </div>
 </div>

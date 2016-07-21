@@ -1,5 +1,5 @@
         <div class="container-fluid">
-            <div class="row">
+            <div>
             <div class="col-md-6 col-md-push-6 well well-sm text-center">
                 <h4>Record, Compare, Compete</h4>
                 <p>To add your new PB or view all of your records, go to <a ng-href="/#/profile/{{main.username}}">Your Profile</a>!</p>
@@ -25,20 +25,22 @@
             </div>
         </div>
         
-        <div><h3>Latest PBs</h3>
+        <div>
+            <div><h3>Latest PBs</h3>
        
-        <table class="table table-striped">
-        <th class="col-xs-4">Lift</th>
-        <th class="col-xs-2 text-center">Weight</th>
-        <th class="col-xs-4 text-center">By</th>
-        <th class="col-xs-2 text-center">On</th>
-        <tr ng-repeat="lift in main.lifts | filter: (!!main.query || undefined) && main.query : true | orderBy: 'date':true | limitTo:5">
-            <td>{{lift.title}}</td>
-            <td class="text-center">{{lift.weight}} kg</td>
-            <td class="text-center"><a ng-href="/#/profile/{{lift.author}}">{{lift.firstName}} {{lift.lastName}}</a></td>
-            <td class="text-center">{{lift.date | date : mediumDate}}</td>
-        </tr>
-        
-        </table>
+            <table class="table table-striped">
+            <th class="col-xs-4">Lift</th>
+            <th class="col-xs-2 text-center">Weight</th>
+            <th class="col-xs-4 text-center">By</th>
+            <th class="col-xs-2 text-center">On</th>
+            <tr ng-repeat="lift in main.lifts | filter: (!!main.query || undefined) && main.query : true | orderBy: 'date':true | limitTo:5">
+                <td>{{lift.title}}</td>
+                <td class="text-center">{{lift.weight}} kg</td>
+                <td class="text-center"><a ng-href="/#/profile/{{lift.author}}">{{lift.firstName}} {{lift.lastName}}</a></td>
+                <td class="text-center">{{lift.date | date : mediumDate}}</td>
+            </tr>
+            
+            </table>
+        </div>
         </div>
         </div>
